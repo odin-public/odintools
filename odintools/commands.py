@@ -50,6 +50,8 @@ class PublishCommand(setuptools.Command):
                       .format(constants.PYPI_PASSWORD_VAR))
             return
 
+        os.environ['DEVPI_INDEX'] = self.index
+
         self.spawn('devpi use {0}'
                    .format(constants.PYPI_REPO_BASE)
                    .split())
@@ -62,6 +64,16 @@ class PublishCommand(setuptools.Command):
         self.spawn('devpi upload'
                    .split())
 
+    def _set_version(self):
+        if not hasattr(self.distribution.metadata, 'version_getter'):
+            raise distutils.errors.DistutilsOptionError(
+                "Please supply a 'version_getter' callback")
+
+        version = self.distribution.metadata.version_getter
+
+        self.distribution.metadata.version = version(self.index)
+
     def run(self):
+        self._set_version()
         self._validate_version()
         self._upload()
