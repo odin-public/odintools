@@ -50,8 +50,6 @@ class PublishCommand(setuptools.Command):
                       .format(constants.PYPI_PASSWORD_VAR))
             return
 
-        os.environ['DEVPI_INDEX'] = self.index
-
         self.spawn('devpi use {0}'
                    .format(constants.PYPI_REPO_BASE)
                    .split())
@@ -61,7 +59,7 @@ class PublishCommand(setuptools.Command):
         self.spawn('devpi use {0}'
                    .format(self.index)
                    .split())
-        self.spawn('devpi upload'
+        self.spawn('devpi upload --from-dir ./dist'
                    .split())
 
     def _set_version(self):
@@ -76,4 +74,5 @@ class PublishCommand(setuptools.Command):
     def run(self):
         self._set_version()
         self._validate_version()
+        self.run_command('sdist')
         self._upload()

@@ -1,6 +1,7 @@
-import os
 import commands
 import distutils
+
+from odintools import _get_version_file
 
 
 def odintools(dist, attr, value):
@@ -18,14 +19,17 @@ def odintools(dist, attr, value):
     })
 
 
-def version_getter(dist, attr, getter):
-    if not callable(getter):
+def version_getter(dist, attr, make_getter):
+    if not callable(make_getter):
         raise distutils.errors.DistutilsSetupError(
-            "Value passed to 'version_getter' must be callable, got {1}".format(type(getter))
+            "Value passed to 'version_getter' must be callable, got {1}".format(type(make_getter))
         )
 
-    index = os.environ.get('DEVPI_INDEX')
-    dist.metadata.version_getter = getter()
+    try:
+        with open(_get_version_file()) as ver:
+            version = ver.read().strip()
+    except IOError:
+        version = None
 
-    if index:
-        dist.metadata.version = dist.metadata.version_getter(index)
+    dist.metadata.version_getter = make_getter()
+    dist.metadata.version = version
