@@ -21,11 +21,15 @@ def version(ver, suffix=None):
 
 
 def _get_version_file():
-    return os.path.join(os.getcwd(), 'VERSION')
+    return os.path.join(_get_package_root(), 'VERSION')
 
 
 def _get_manifest_file():
-    return os.path.join(os.getcwd(), 'MANIFEST.in')
+    return os.path.join(_get_package_root(), 'MANIFEST.in')
+
+
+def _get_package_root():
+    return os.getcwd()
 
 
 def _write_version_file(version):

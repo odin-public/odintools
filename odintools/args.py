@@ -16,6 +16,7 @@ def odintools(dist, attr, value):
 
     dist.cmdclass.update({
         'publish': commands.PublishCommand,
+        'docs': commands.BuildDocCommand,
     })
 
 

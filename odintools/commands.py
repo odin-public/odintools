@@ -1,10 +1,13 @@
 import os
+import zipfile
 import setuptools
 import distutils
+import markdown
 import constants
 import validators
 
 from operator import itemgetter
+from odintools import _get_package_root
 
 
 class PublishCommand(setuptools.Command):
@@ -75,4 +78,37 @@ class PublishCommand(setuptools.Command):
         self._set_version()
         self._validate_version()
         self.run_command('sdist')
+        self.run_command('docs')
         self._upload()
+
+
+class BuildDocCommand(setuptools.Command):
+    description = "Create a devpi-compatible documentation in the 'dist' dir"
+    user_options = []
+
+    def initialize_options(self):
+        pass
+
+    def finalize_options(self):
+        pass
+
+    def run(self):
+        src = os.path.join(_get_package_root(), 'README.md')
+        dst_dir = os.path.join(_get_package_root(), 'dist')
+
+        if not os.path.exists(src):
+            print("README.md does not exist, skipping documentation generation")
+            return
+
+        if not os.path.exists(dst_dir):
+            os.mkdir(dst_dir, 0755)
+
+        doc_file = '{0}.{1}'.format(self.distribution.metadata.get_fullname(), 'doc.zip')
+
+        with open(os.path.join(dst_dir, doc_file), 'w') as zip:
+            doc = zipfile.ZipFile(zip, 'w')
+
+            with open(src) as readme:
+                doc.writestr('index.html', markdown.markdown(readme.read()))
+
+            doc.close()
