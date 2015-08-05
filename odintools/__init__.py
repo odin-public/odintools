@@ -40,4 +40,4 @@ def _write_version_file(version):
     with open(_get_manifest_file(), mode) as f:
         if not any(filter(lambda s: 'VERSION' in s, f.readlines())):
             f.seek(0, os.SEEK_END)
-            f.write("include VERSION")
+            f.write("\ninclude VERSION")
