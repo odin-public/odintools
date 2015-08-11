@@ -15,6 +15,15 @@ def version():
         data = verfile.readlines()
         return data[0].strip()
 
+try:
+    # when launched during the build process
+    from odintools.commands import BuildDocCommand
+    x = BuildDocCommand
+    cmdclass = {'docs': x}
+except:
+    # when installed in production
+    cmdclass = {}
+
 setup(
     name=PACKAGE_NAME,
     author='Dmitriy Fontanov',
@@ -34,12 +43,15 @@ setup(
     keywords=['setup', 'distutils'],
     packages=find_packages(),
     install_requires=[
-        'devpi', 'importlib', 'markdown' # note: importlib is a missing depend of markdown
+        'devpi',
+        'importlib',  # note: importlib is a missing depend of markdown
+        'markdown'
     ],
     entry_points={
         'distutils.setup_keywords': [
             'odintools = odintools.args:odintools',
             'version_getter = odintools.args:version_getter',
         ]
-    }
+    },
+    cmdclass=cmdclass
 )
