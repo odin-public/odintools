@@ -23,7 +23,8 @@ def odintools(dist, attr, value):
 def version_getter(dist, attr, make_getter):
     if not callable(make_getter):
         raise distutils.errors.DistutilsSetupError(
-            "Value passed to 'version_getter' must be callable, got {1}".format(type(make_getter))
+            "Value passed to 'version_getter' must be callable, got {1}".format(
+                type(make_getter))
         )
 
     try:
