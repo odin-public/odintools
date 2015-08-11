@@ -11,11 +11,9 @@ def long_description():
 
 
 def version():
-    build = os.environ.get('BUILD_NUMBER')
-    if build == None:
-        raise Exception('BUILD_NUMBER is not defined')
-    return '0.1.{0}'.format(build)
-
+    with open(os.path.join(__path__, 'version.txt'), 'r') as verfile:
+        data = verfile.readlines()
+        return data[0].strip()
 
 setup(
     name=PACKAGE_NAME,
@@ -36,7 +34,7 @@ setup(
     keywords=['setup', 'distutils'],
     packages=find_packages(),
     install_requires=[
-        'devpi', 'markdown'
+        'devpi', 'importlib', 'markdown' # note: importlib is a missing depend of markdown
     ],
     entry_points={
         'distutils.setup_keywords': [
