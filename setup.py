@@ -2,9 +2,19 @@ import os
 from setuptools import setup, find_packages
 
 
+__path__ = os.path.split(__file__)[0]
 PACKAGE_NAME = 'odintools'
 
-long_description = open(os.path.join(os.getcwd(), 'README.md')).read()
+
+def long_description():
+    return open(os.path.join(__path__, 'README.md')).read()
+
+
+def version():
+    build = os.environ.get('BUILD_NUMBER')
+    if build == None:
+        raise Exception('BUILD_NUMBER is not defined')
+    return '0.1.{0}'.format(build)
 
 
 setup(
@@ -12,9 +22,9 @@ setup(
     author='Dmitriy Fontanov',
     author_email='ap-dc-team@odin.com',
     description='Odin setuptools extensions',
-    long_description=long_description,
+    long_description=long_description(),
     url='https://git.sw.ru/projects/DC/repos/odintools',
-    version='0.1.5',
+    version=version(),
     license='MIT',
     classifiers=[
         'License :: OSI Approved :: MIT License',
