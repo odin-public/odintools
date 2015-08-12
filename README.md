@@ -37,29 +37,6 @@ provided by it:
 $ python setup.py publish --dev
 ```
 
-## Installing a package built with odintools
-
-Besides ~/.pip/pip.conf file with the following contents:
-
-```bash
-mkdir ~/.pip; cat > ~/.pip/pip.conf <<EOF
-[global]
-index-url = http://pypi.aps.sw.ru/odin/pypi/+simple/
-trusted-host = pypi.aps.sw.ru
-EOF
-```
-
-you'll need a setuptools/disutils configuration file:
-
-```bash
-cat > .pydistutils.cfg <<EOF
-[easy_install]
-index-url = http://pypi.aps.sw.ru/odin/pypi/+simple/
-trusted-host = pypi.aps.sw.ru
-EOF
-```
 
 Pydistutils is required because `setup_requires` line in `setup()` call is processed
 by setuptools, not pip, so it needs a separate configuration.
-
-[python-packaging]: https://rnd-teamwork.sw.ru/x/1x-N
