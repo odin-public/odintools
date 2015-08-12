@@ -37,8 +37,6 @@ provided by it:
 $ python setup.py publish --dev
 ```
 
-you'll need a setuptools/disutils configuration file:
-
 
 Pydistutils is required because `setup_requires` line in `setup()` call is processed
 by setuptools, not pip, so it needs a separate configuration.
