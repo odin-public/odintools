@@ -26,15 +26,15 @@ except:
 
 setup(
     name=PACKAGE_NAME,
-    author='Dmitriy Fontanov',
-    author_email='ap-dc-team@odin.com',
+    author='Odin Automation DevCloud team',
+    author_email='support@odin.com',
     description='Odin setuptools extensions',
     long_description=long_description(),
-    url='https://git.sw.ru/projects/DC/repos/odintools',
+    url='http://odin.com',
     version=version(),
-    license='MIT',
+    license='Other/Proprietary License',
     classifiers=[
-        'License :: OSI Approved :: MIT License',
+        'License :: Other/Proprietary License',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
@@ -45,7 +45,7 @@ setup(
     install_requires=[
         'devpi',
         'importlib',  # note: importlib is a missing depend of markdown
-        'markdown'
+        'markdown',
     ],
     entry_points={
         'distutils.setup_keywords': [
