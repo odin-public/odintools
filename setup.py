@@ -43,7 +43,6 @@ setup(
     keywords=['setup', 'distutils'],
     packages=find_packages(),
     install_requires=[
-        'devpi',
         'importlib',  # note: importlib is a missing depend of markdown
         'markdown',
     ],
