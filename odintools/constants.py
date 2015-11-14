@@ -1,3 +1,3 @@
-PYPI_REPO_BASE = 'http://pypi.aps.sw.ru'
+PYPI_REPO_BASE = 'http://pypi.int.zone'
 PYPI_REPO_USER = 'odin'
 PYPI_PASSWORD_VAR = 'PYPI_ODIN_PASSWORD'
