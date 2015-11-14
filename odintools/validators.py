@@ -16,7 +16,7 @@ def validator(index):
             if match is None:
                 raise distutils.errors.DistutilsOptionError(
                     "Invalid version format: '{0}', please consult "
-                    "https://rnd-teamwork.sw.ru/x/1x-N".format(version)
+                    "https://confluence.int.zone/x/1x-N".format(version)
                 )
 
         validators[index] = wrapper
