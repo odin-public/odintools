@@ -44,7 +44,7 @@ setup(
     packages=find_packages(),
     install_requires=[
         'importlib',  # note: importlib is a missing depend of markdown
-        'markdown',
+        'markdown==2.6.2',
     ],
     entry_points={
         'distutils.setup_keywords': [
