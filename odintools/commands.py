@@ -1,10 +1,12 @@
+from __future__ import print_function
+from __future__ import absolute_import
 import os
 import zipfile
 import setuptools
 import distutils
 import markdown
-import constants
-import validators
+from . import constants
+from . import validators
 
 from operator import itemgetter
 from odintools import _get_package_root
@@ -101,7 +103,7 @@ class BuildDocCommand(setuptools.Command):
             return
 
         if not os.path.exists(dst_dir):
-            os.mkdir(dst_dir, 0755)
+            os.mkdir(dst_dir, 0o755)
 
         doc_file = '{0}.{1}'.format(self.distribution.metadata.get_fullname(), 'doc.zip')
 

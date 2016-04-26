@@ -1,4 +1,5 @@
-import commands
+from __future__ import absolute_import
+from . import commands
 import distutils
 
 from odintools import _get_version_file
