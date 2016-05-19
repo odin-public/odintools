@@ -34,7 +34,7 @@ class PublishCommand(setuptools.Command):
                       map(itemgetter(3),
                           filter(lambda op: len(op) == 4 and 'index' in op[3],
                                  self.user_options)))
-        index = filter(lambda i: getattr(self, i, None), indexes)
+        index = list(filter(lambda i: getattr(self, i, None), indexes))
 
         if len(index) != 1:
             raise distutils.errors.DistutilsOptionError("Please supply either "
@@ -107,7 +107,7 @@ class BuildDocCommand(setuptools.Command):
 
         doc_file = '{0}.{1}'.format(self.distribution.metadata.get_fullname(), 'doc.zip')
 
-        with open(os.path.join(dst_dir, doc_file), 'w') as zip:
+        with open(os.path.join(dst_dir, doc_file), 'wb') as zip:
             doc = zipfile.ZipFile(zip, 'w')
 
             with open(src) as readme:
