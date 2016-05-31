@@ -19,13 +19,16 @@ def install_requires():
 
 
 def version():
+    def version_file(mode='r'):
+        return open(os.path.join(__path__, 'version.txt'), mode)
+
     if os.getenv('TRAVIS'):
         major_version = '0.2'
-        return '{0}.{1}'.format(major_version, os.getenv('TRAVIS_BUILD_NUMBER'))
-    else:
-        with open(os.path.join(__path__, 'version.txt'), 'r') as verfile:
-            data = verfile.readlines()
-            return data[0].strip()
+        with version_file('w') as verfile:
+            verfile.write('{0}.{1}'.format(major_version, os.getenv('TRAVIS_BUILD_NUMBER')))
+    with version_file() as verfile:
+        data = verfile.readlines()
+        return data[0].strip()
 
 
 try:
