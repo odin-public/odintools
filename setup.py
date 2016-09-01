@@ -13,7 +13,7 @@ def long_description():
 
 def install_requires():
     if sys.version_info < (2, 7):
-        return ['importlib==1.0.3', 'markdown==2.6.2']
+        return ['importlib>=1.0', 'markdown==2.6.2']
     else:
         return ['markdown==2.6.6']
 
